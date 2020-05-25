@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Moonlighting Lamp</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="moonlighting, moon, lighting, light, LED, diy, project, arduino, nightlight, night, lamp">
+    <meta name="description" content="A glorified nightlight that changes brightness based on proximity" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://github.com/sakeofmaking"><img src="images/github.png" width="32" height="32" alt="GitHub" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Moonlighting Lamp</h2>
+    
+    <h3>May 29th, 2015</h3>
+        
+    <p><img src="https://farm8.staticflickr.com/7779/18209076802_e030164925_z.jpg" width="640" height="480" alt="Moonlighting Lamp" /></p>
+    <iframe width="640" height="382" src="https://www.youtube.com/embed/IztoX6Cp2nQ" frameborder="0" allowfullscreen></iframe>
+        
+    <p>The Moonlighting Lamp is a glorified nightlight that changes brightness based on proximity. Most nightlights use a motion sensor to 
+        detect someone's presence and abruptly turn on. The Moonlighting Lamp uses a proximity sensor to detect someone's presence and calmly 
+        illuminates as they approach. If you're like me and can't stand those abrupt nightlights, this lamp is for you. </p>  
+        
+    <h4>Step 1: Materials + Tools</h4> 
+    <p><img src="https://farm1.staticflickr.com/474/17630435654_2e04a768d0_z.jpg" width="640" height="480" alt="Materials" /></p>    
+    <p>Materials:</p>
+    <ul>
+        <li>Ikea Vate Lamp from <a href="http://www.amazon.com/Ikea-201-620-01-Table-Asian-Paper/dp/B0051RZV7E/ref=sr_1_19?ie=UTF8&qid=1431275439&sr=8-19&keywords=ikea+lamp">Amazon</a></li>
+        <li>Arduino Uno</li>
+        <li>9V, 250mA or more, 2.1mm center pin positive adapter or other Arduino power supply</li>
+        <li>Ultrasonic Rangefinder - LV-EZ0 from <a href="https://www.adafruit.com/products/979">Adafruit</a>. Other distance sensors will work but I picked this one for its long range and wide beam width.</li>
+        <li>7-pin female header</li>
+        <li>light dependent resistor (LDR) salvaged from a lawn light</li>
+        <li>white 5mm dome piranha LED x4 from <a href="http://www.digikey.com/product-detail/en/CP41B-WGS-CK0P0154/CP41B-WGS-CK0P0154-ND/1922950">DigiKey</a></li>
+        <li>220Ohm resistor x4</li>
+        <li>10kOhm resistor</li>
+        <li>breadboard</li>
+        <li>small recycled plastic container to mount contents inside lamp</li>
+        <li>solid core wire</li>
+        <li>solder</li>
+    </ul>
+    <p>Tools:</p>
+     <ul>
+        <li>Arduino IDE</li>
+        <li>A-B USB cable</li>
+        <li>wire cutters</li>
+        <li>soldering iron</li>
+    </ul>
+      
+    <h4>Step 2: Assemble the Circuit</h4>
+    <p>Begin by preparing the LV-EZ0. Solder a 7-pin female header through the holes. We'll only be using 3 of these pins: GND, +5, AN. Populate the breadboard according 
+        to the below pictorial diagram and schematic. I used a breadboard and jumper wires as opposed to soldering the components to a through hole board because of the 
+        circuit's simplicity. When wiring the LV-EZ0, use long enough wires so that the sensor can poke out the top of the lamp shade.</p>
+    <p><img src="https://farm9.staticflickr.com/8787/18024900418_5ee23f8452_z.jpg" width="640" height="556" alt="Pictorial Circuit" /></p>
+    <p><img src="https://farm9.staticflickr.com/8889/17592143273_7fd366cc8e_z.jpg" width="640" height="567" alt="Schematic Diagram" /></p>
+    <p><img src="https://farm1.staticflickr.com/294/17632394093_a804d911a9_z.jpg" width="640" height="360" alt="Actual Circuit" /></p>
+        
+    <h4>Step 3: Upload the Code</h4>
+    <p>Connect your Arduino to your computer. Copy and paste the linked <a href="https://github.com/sakeofmaking/Moonlighting_Lamp/blob/master/Moonlighting_Lamp.ino">code</a> 
+        into your Arduino IDE. Run Verify and then Upload. At first glance, not much might happen. Make sure the LDR is covered and then try testing the circuit. The Arduino 
+        is progrmamed to only power the distance sensor in low-light conditions. This value can be tweaked under</p>
+    <q>enable distance sensor only if day</q>
+    <p><img src="https://farm1.staticflickr.com/343/18063646000_c7ba866bc3_o.jpg" width="640" height="694" alt="Code" /></p>
+        
+    <h4>Step 4: Hide the Circuit in the Lamp Shade</h4>
+    <p>Carefully stuff your lamp shade with the assembled circuit. Be sure to thread the distance sensor through the opening at the top. Connect your Arduino to its 
+        power source. Lastly, insert your recycled plastic container mount to rest the circuit on and center the LEDs.</p>
+    <p><img src="https://farm8.staticflickr.com/7793/18031988609_dbd1d96871_z.jpg" width="640" height="480" alt="Hidden Circuit" /></p>
+        
+    <h4>Step 5: Enjoy</h4>
+    <p>Plug the Arduino in and enjoy...at night.</p>
+    <p><img src="https://farm9.staticflickr.com/8802/18213963241_4234d06767_z.jpg" width="640" height="427" alt="Moonlighting Lamp" /></p>
+    <p><img src="https://farm1.staticflickr.com/433/18249908562_0757913df2_z.jpg" width="640" height="360" alt="Moonlighting Lamp" /></p>
+        
+    </div>
+    
+  </body>
+  
+</html>

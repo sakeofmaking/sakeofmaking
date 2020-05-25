@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Automated Watering System: VHDL</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="automated, watering, system, plant, vhdl">
+    <meta name="description" content="A watering system based on soil moisture and rain forecasted" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://github.com/sakeofmaking"><img src="images/github.png" width="32" height="32" alt="GitHub" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Automated Watering System: VHDL</h2>
+    
+    <h3>September 5th, 2015</h3>
+        
+    <p><img src="https://farm6.staticflickr.com/5791/20545726453_75efdd8ff4_z.jpg" width="640" height="360" alt="Automated Watering System" /></p>
+        
+    <p>The Automated Watering System is a VHDL design project for the embedded systems course Introduction to Digital Logic and Hardware Architecture.
+        The system continuously checks the soil moisture level and rain forecasted. Based on these measurements a water valve is either opened or left 
+        closed. The duration the valve is left open depends on the water initially present or forecasted. For example, very dry soil and no rain 
+        forecasted will require the valve be left open longer than if the soil was initially moist and some rain was forecasted. The system accomplishes 
+        this by continuously checking the soil moisture and rain forecasted, even while the valve is open. Once the soil is saturated, the valve will be 
+        closed again.</p>
+        
+    <h4>Initial Steps</h4>
+    <p>Below is a summary of the initial steps I took in order to get to a working model.</p>
+    <ol>
+        <li>Noted the inputs and output of the system</li>
+        <li>Made a truth table relating the inputs and output, including the minterms</li>
+        <li>Used the I/O relation to design a state transition diagram</li>
+        <li>Used the minterms and state transition diagram to begin coding in SystemVerilog</li>
+        <li>Switched to VHDL because I couldn't get the testbench to run in SystemVerilog for a Final State Machine (FSM)</li>
+        <li>Encountered delay issues with the simulation waveforms</li>
+        <li>Fine-tuned the testbench delays to display readable waveforms</li>
+        <li>Encountered issues interpreting the resulting waveforms</li>
+        <li>Understood that the testbench doesn't test for every possibility</li>
+        <li>Designed a testbench that tests for the likeliest of possibilities</li>
+    </ol>
+        
+    
+    <h4>Inputs and Outputs</h4>    
+    <p><img src="https://farm1.staticflickr.com/601/21173403441_7136936bdb_z.jpg" width="640" height="360" alt="I/O Bits" /></p>    
+    <p>There are two inputs: soil moisture level and rain forecasted. Each input is represented with two bits: (M1, M0) and (R1, R0). This gives four 
+        levels of intensity per input.</p>
+    <p>For simplicity, there is only one output: valve. The valve is either opened or closed, so one bit is sufficient to represent the output: V.</p>
+    <p>Let's believe that fully saturated soil is represented by (M1, M0) = (1, 1) and that a rain forecast of 
+        (R1, R0) = (1, 1) is enough to fully saturate the soil. Let's also believe that we want the soil to be fully saturated at all times or know that 
+        the rain forecasted will fully saturate the soil. My plants apparently love moisture. This means if the addition of (M1, M0) and (R1, R0) does 
+        not equal at least (1, 1) then we want to open the valve, represented by V = 1. The below Truth Table defines this behavior.</p>
+    
+    <p>Truth Table
+    <table id="truth">
+    <tr class="first"><td>M1</td><td>M0</td><td>R1</td><td>R0</td><td class="v">V</td><td>minterm</td></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td class="v">1</td><td>M1'M0'R1'R0'</td></tr>
+    <tr><td>0</td><td>0</td><td>0</td><td>1</td><td class="v">1</td><td>M1'M0'R1'R0</td></tr>
+    <tr><td>0</td><td>0</td><td>1</td><td>0</td><td class="v">1</td><td>M1'M0'R1R0'</td></tr>
+    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td class="v">0</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>0</td><td class="v">1</td><td>M1'M0R1'R0'</td></tr>
+    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td class="v">1</td><td>M1'M0R1'R0</td></tr>
+    <tr><td>0</td><td>1</td><td>1</td><td>0</td><td class="v">0</td></tr>
+    <tr><td>0</td><td>1</td><td>1</td><td>1</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>0</td><td class="v">1</td><td>M1M0'R1'R0'</td></tr>
+    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>0</td><td>1</td><td>1</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>1</td><td>0</td><td>1</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>0</td><td class="v">0</td></tr>
+    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td class="v">0</td></tr>
+    </table></p>
+     
+    <p>This behavior is nice. We got the valve open. But how long do we want the valve to remain open? How do we close the valve? The answer is 
+        with states! We want to throw the system into different states depending on how long we want the valve to remain open. I decided to use four 
+        states: S0, S1, S2, S3. Each state represents the level of water necessary to saturate the soil fully. For example, an initial reading of 
+        (M1, M0) = (0, 0) and (R1, R0) = (0, 0) will throw the system into state = S3, where V = 1. From S3, the system will progressively drop to a 
+        lower state until reaching S0, where V = 0. This makes sense, as the valve releases water into the soil, the soil will require less water and 
+        thus drop into a state that represents this. The below State Transition Diagram and Next State Table define this behavior for all states.</p> 
+      
+    <p>State Transition Diagram<img src="https://farm6.staticflickr.com/5669/21155341872_4f63c2832a_z.jpg" width="640" height="480" alt="State Diagram" /></p>
+        
+    <p>Next State Table
+    <table id="truth">
+    <tr class="first"><td>#</td><td class="left">Current State</td><td class="left">M1</td><td>M0</td><td>R1</td><td>R0</td><td class="left">Next State</td></tr>
+    <tr class="first"><td>1</td><td class="left">S0</td><td class="left">0</td><td>0</td><td>0</td><td>0</td><td class="left">S3</td></tr>
+    <tr><td>2</td><td class="left">S0</td><td class="left">0</td><td>0</td><td>0</td><td>1</td><td class="left">S2</td></tr>
+    <tr class="first"><td> </td><td class="left">  </td><td class="left">0</td><td>1</td><td>0</td><td>0</td><td class="left">  </td></tr>
+    <tr><td>3</td><td class="left">S0</td><td class="left">0</td><td>0</td><td>1</td><td>0</td><td class="left">S1</td></tr>
+    <tr><td> </td><td class="left">  </td><td class="left">0</td><td>1</td><td>0</td><td>1</td><td class="left">  </td></tr>
+    <tr class="first"><td> </td><td class="left">  </td><td class="left">1</td><td>0</td><td>0</td><td>0</td><td class="left">  </td></tr>
+    <tr class="first"><td>4</td><td class="left">S0</td><td colspan="4" class="left">any other combinations</td><td class="left">S0</td></tr>
+    <tr><td>5</td><td class="left">S1</td><td class="left">0</td><td>0</td><td>1</td><td>0</td><td class="left">S1</td></tr>
+    <tr><td> </td><td class="left">  </td><td class="left">0</td><td>1</td><td>0</td><td>1</td><td class="left">  </td></tr>
+    <tr class="first"><td> </td><td class="left">  </td><td class="left">1</td><td>0</td><td>0</td><td>0</td><td class="left">  </td></tr>
+    <tr class="first"><td>6</td><td class="left">S1</td><td colspan="4" class="left">any other combinations</td><td class="left">S0</td></tr>
+    <tr><td>7</td><td class="left">S2</td><td class="left">0</td><td>0</td><td>0</td><td>1</td><td class="left">S2</td></tr>
+    <tr class="first"><td> </td><td class="left">  </td><td class="left">0</td><td>1</td><td>0</td><td>0</td><td class="left">  </td></tr>
+    <tr class="first"><td>8</td><td class="left">S2</td><td colspan="4" class="left">any other combinations</td><td class="left">S1</td></tr>
+    <tr class="first"><td>9</td><td class="left">S3</td><td class="left">0</td><td>0</td><td>0</td><td>0</td><td class="left">S3</td></tr>
+    <tr><td>10</td><td class="left">S3</td><td colspan="4" class="left">any other combinations</td><td class="left">S2</td></tr>
+    </table></p>
+    
+    <p>A different state transition diagram can achieve the same effect. I initially had designed the diagram such that S1, S2, S3 fed directly 
+    back to S0. This design required a lot of repetitive code and defeated the purpose of using multiple states. Feeding S3 into S2 into S1 into 
+    S0 saves code and differentiates each state.</p>
+    
+    <h4>VHDL Code</h4>
+    <p>After a state transition diagram, we can begin coding. I initially began coding in SystemVerilog but because I couldn't get the testbench 
+        running in <a href="http://www.edaplayground.com/">EDA Playground</a> I switched to VHDL. I later learned that SystemVerilog requires 
+        additional code and markers just to simulate in EDA Playground. Linked is my <a href="http://www.edaplayground.com/x/4Ug">VHDL source code</a>. 
+        Of particular interest is the following condition for state S0. If you look closely, you'll notice each of the conditions to move from S0 to another 
+        state match the minterms previously listed in the Truth Table. This makes sense because the Truth Table describes the starting state S0 
+        and each minterm describes a state where V = 1 is true. V = 1 is only true for states S1, S2, S3.</p>
+    <q>
+        when S0 => <span style="padding-left:60px;">-- valve is off</span><br>
+        <span style="padding-left:40px;">if</span><span style="padding-left:110px;">(not M1 and not M0 and not R1 and not R0)</span><br>
+        <span style="padding-left:80px;">then</span><span style="padding-left:50px;">nextstate <= S3;</span><br>
+        <span style="padding-left:80px;">elsif</span><span style="padding-left:50px;">(not M1 and not M0 and not R1 and</span><span style="padding-left:30px;">R0)</span><br>
+        <span style="padding-left:80px;">or</span><span style="padding-left:65px;">(not M1 and</span><span style="padding-left:30px;">M0 and not R1 and not R0)</span><br>
+        <span style="padding-left:80px;">then</span><span style="padding-left:50px;">nextstate <= S2;</span><br>
+        <span style="padding-left:80px;">elsif</span><span style="padding-left:50px;">(not M1 and not M0 and</span><span style="padding-left:30px;">R1 and not R0)</span><br>
+        <span style="padding-left:80px;">or</span><span style="padding-left:65px;">(not M1 and</span><span style="padding-left:30px;">M0 and not R1 and</span><span style="padding-left:30px;">R0)</span><br>
+        <span style="padding-left:80px;">or</span><span style="padding-left:65px;">(</span><span style="padding-left:25px;">M1 and not M0 and not R1 and not R0)</span><br>
+        <span style="padding-left:80px;">then</span><span style="padding-left:50px;">nextstate <= S1;</span><br>
+        <span style="padding-left:80px;">else</span><span style="padding-left:50px;">nextstate <= S0;</span><br>
+        <span style="padding-left:40px;">end if;</span><br>
+    </q>
+        
+    <h4>Simulation</h4>
+    <p>Of the three testbench models given in the text [1], I decided to use a test vector file because of its complexity and familiarity. I used 
+        this model to test a simple logic circuit previously. Now, I needed to apply it to a FSM. Previously with the simple logic circuit, the inputs 
+        tested the circuit for every possibility. For some reason I thought this would do the same for my FSM. This not the case. As with each new 
+        clock cycle the testbench reevaluates the inputs from the current state's perspective. This means I can't realistically test my design 
+        with every possibility but should instead test my design with the most likely of possibilities. Below are two Likely Events.</p>
+    <p>Likely Event: S3<img src="https://farm1.staticflickr.com/577/20978770909_4f3c5e7ee3_z.jpg" width="640" height="270" alt="Likely Test 3" /></p>
+    <p>Likely Event: S3 describe a likely pattern of events. Beginning in S0 the valve is closed because, even though the soil moisture is level 0, 
+        level 3 rain is forecasted. The forecast now drops to level 0, triggering a state change to S3. In S3 the valve is open and the soil begins 
+        to saturate. As the soil moisture increases the state drops to S2 then S1. At level 3 soil moisture the state returns to S0.</p>
+    <p>Likely Event: S1<img src="https://farm1.staticflickr.com/607/20544474633_f91f685671_z.jpg" width="640" height="270" alt="Likely Test 1" /></p>
+    <p>Likely Event: S1 is similar to Likely Test: S3. The main difference being that the forecast only drops from level 3 to level 2. This throws the 
+        system into S1. S1 only requires that the soil saturate to level 1 before returning to S0. This is because the level 2 rain forecast combined with 
+        the level 1 soil moisture will fully saturate the soil.</p>
+    <p>The above simulations are just that, simulations. The soil would definitely take longer than 20ns to saturate. In reality the system would 
+        remain in a state for seconds/minutes not nanoseconds.</p>
+    <p>My greatest issue was interpreting the waveforms after running the simulation for the first time. The waveforms were skewed from one another. 
+        I couldn't tell if this was a result of my logic being off or a timing issue. Studying the waveforms closer, I could tell the logic 
+        was mostly intact. I then tinkered with the clk, reset, input, and output delays until I understood them. From there, I fine-tuned the delays 
+        until the results lined up with what was expected. Realistically the output waveforms would lag behind the input waveforms but for readability, 
+        I've synced the waveforms. This wasn't the only delay issue I had. I had trouble displaying the entire waveform on EDA Playground. For some 
+        reason, EDA Playground likes to cut your waveforms short by at least one input. To extend the graph I add a 100ns delay after the read vector 
+        file loop.</p>
+    <p>Here is a link to <a href="final_project_phase_2.html">Phase 2</a> of the project where I expand upon what was just discussed.</p>
+        
+    <h4>Works Cited</h4>
+    <p>[1] Harris, D. M. and Harris, S. L., 2012, Digital Design and Computer Architecture, 2nd ed., Morgan Kaufmann, Burlington, MA, Chap. 4.</p>
+        
+    </div>
+    
+  </body>
+  
+</html>

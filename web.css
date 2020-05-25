@@ -1,0 +1,312 @@
+/*Overall*/
+html {
+    overflow-y: scroll;
+}
+body {
+	font-family: helvetica, arial, sans-serif;
+	color: rgb(114,114,114);
+	max-width: 960px;
+	margin: 0 auto;
+	}
+p {
+	line-height: 1.5;
+	}
+a {
+	text-decoration: none;
+	color: rgb(0,150,255);
+	}
+a:hover {
+	color: rgb(255,0,255);
+	}
+
+/*Auto Water System Truth Table*/
+#truth {
+    text-align: center;
+}
+#truth tr.first td {
+    border-collapse: collapse;
+    border-bottom: 1px solid black;
+    padding: 0px 7px 0px 7px;
+}
+#truth td.v {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+/*Auto Water System Next State Table*/
+#truth td.left {
+    border-left: 1px solid black;
+}
+
+/* Cross Compile RPi Table */
+#model{
+    text-align: left;
+    background-color: rgb(223,218,211);
+}
+#model tr.top td {
+    border-bottom: 2px solid white;
+}
+#model td.left{
+    border-right: 2px solid white;
+    width: 98px;
+}
+
+/* Warning */
+#warning {
+    color: rgb(255,0,0);
+}
+
+
+/* Code */
+p.code {
+    background-color: rgb(223,218,211);
+    font-family: courier, helvetica, arial;
+}
+
+/*Navigation*/
+#navigation1, #current1 {
+    width: 80px;
+}
+#navigation2, #current2 {
+    width: 100px;
+}
+#navigation3, #current3 {
+    width: 140px;
+}
+#navigation1, #navigation2, #navigation3 {
+    float: left;
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(114,114,114);
+    font-family: helvetica, "Courier New";
+	font-size: 1.1em;
+	color: rgb(114,114,114);
+}
+#current1, #current2, #current3 {
+    float: left;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 4px solid rgb(0,150,255);
+    font-family: helvetica, "Courier New";
+	font-size: 1.1em;
+	color: rgb(0,0,0);
+}
+#navigation1:hover, #navigation2:hover, #navigation3:hover {
+    font-weight: bold;
+    color: rgb(0,0,0);
+    padding-bottom: 10px;
+    border-bottom: 4px solid rgb(0,150,255);
+}
+
+
+/*Icons*/
+#icons {
+    text-align: right;
+}
+
+/*Content*/
+#content p, h4 {
+    width: 640px;
+}
+#content ul, ol {
+    width: 600px;
+}
+#content img {
+    float: left;
+    padding: 0 0 1em 0;
+}
+#content_about p {
+    width: 960px;
+}
+#content_about img {
+    float: right;
+    padding: 0 0 5em 1em;
+}
+
+h2 {
+	font-family: helvetica, "Courier New", arial;
+	font-size: 1.4em;
+	}
+h3 {
+    font-family: helvetica, "Courier New", arial;
+	font-size: 1em;
+	font-weight: normal;
+	color: rgb(200,200,200);
+	}
+h4 {
+    font-family: helvetica, "Courier New", arial;
+	font-size: 1em;
+}
+h4.red {
+    color: rgb(182,15,5);
+}
+.img1 a:hover img, .img2 a:hover img, .img3 a:hover img, .img4 a:hover img, .img5 a:hover img, .img6 a:hover img, .img7 a:hover img, .img8 a:hover img, .img9 a:hover img, .img10 a:hover img, .img11 a:hover img, .img12 a:hover img, .img13 a:hover img, .img14 a:hover img, .img15 a:hover img, .img16 a:hover img, .img17 a:hover img, .img18 a:hover img, .img19 a:hover img, .img20 a:hover img, .img21 a:hover img, .img22 a:hover img, .img23 a:hover img, .img24 a:hover img, .img25 a:hover img, .img26 a:hover img, .img27 a:hover img, .img28 a:hover img {
+	opacity: 0.25;
+	}	
+.img1 a .info1, .img1 a .subinfo1, .img2 a .info2, .img2 a .subinfo2, .img3 a .info3, .img3 a .subinfo3, .img4 a .info4, .img4 a .subinfo4, .img5 a .info5, .img5 a .subinfo5, .img6 a .info6, .img6 a .subinfo6, .img7 a .info7, .img7 a .subinfo7, .img8 a .info8, .img8 a .subinfo8, .img9 a .info9,  .img9 a .subinfo9, .img10 a .info10, .img10 a .subinfo10, .img11 a .info11, .img11 a .subinfo11, .img12 a .info12, .img13 a .info13, .img14 a .info14, .img15 a .info15, .img16 a .info16, .img17 a .info17, .img18 a .info18, .img19 a .info19, .img20 a .info20, .img21 a .info21, .img22 a .info22, .img23 a .info23, .img24 a .info24, .img25 a .info25, .img26 a .info26, .img27 a .info27, .img28 a .info28 {
+	display: none;
+	}		
+.img1 a:hover .info1, .img2 a:hover .info2, .img3 a:hover .info3, .img4 a:hover .info4, .img5 a:hover .info5, .img6 a:hover .info6, .img7 a:hover .info7, .img8 a:hover .info8, .img9 a:hover .info9, .img10 a:hover .info10, .img11 a:hover .info11, .img12 a:hover .info12, .img13 a:hover .info13, .img14 a:hover .info14, .img15 a:hover .info15, .img16 a:hover .info16, .img17 a:hover .info17, .img18 a:hover .info18, .img19 a:hover .info19, .img20 a:hover .info20, .img21 a:hover .info21, .img22 a:hover .info22, .img23 a:hover .info23, .img24 a:hover .info24, .img25 a:hover .info25, .img26 a:hover .info26, .img27 a:hover .info27, .img28 a:hover .info28 {
+    position: absolute;
+	top: 0;
+	left: 0;
+	font-family: helvetica, "Courier New", arial;
+	color: rgb(255,255,255);
+    font-size: 1.1em;
+    font-weight: bold;
+	display: block;
+	height: 220px;
+	width: 210px;
+	text-align: left;
+    margin: 20px 20px 0 20px;
+	}
+.img1 a:hover .subinfo1, .img2 a:hover .subinfo2, .img3 a:hover .subinfo3, .img4 a:hover .subinfo4, .img5 a:hover .subinfo5, .img6 a:hover .subinfo6, .img7 a:hover .subinfo7, .img8 a:hover .subinfo8, .img9 a:hover .subinfo9, .img10 a:hover .subinfo10, .img11 a:hover .subinfo11, .img12 a:hover .subinfo12, .img13 a:hover .subinfo13, .img14 a:hover .subinfo14, .img15 a:hover .subinfo15, .img16 a:hover .subinfo16, .img17 a:hover .subinfo17, .img18 a:hover .subinfo18, .img19 a:hover .subinfo19, .img20 a:hover .subinfo20, .img21 a:hover .subinfo21, .img22 a:hover .subinfo22, .img23 a:hover .subinfo23, .img24 a:hover .subinfo24, .img25 a:hover .subinfo25, .img26 a:hover .subinfo26, .img27 a:hover .subinfo27, .img28 a:hover .subinfo28 {
+    position: absolute;
+	top: 3em;
+	left: 0;
+    font-family: helvetica, "Courier New", arial;
+	color: rgb(255,255,255);
+    font-size: .8em;
+    font-weight: bold;
+	display: block;
+	height: 240px;
+	width: 210px;
+	text-align: left;
+    margin: 20px 20px 0 20px;
+    }
+.img1 {
+	position: absolute;
+	margin: 0;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img2 {
+    position: absolute;
+    margin: 0 0 0 15em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img3 {
+	position: absolute;
+	margin: 0 0 0 30em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img4 {
+	position: absolute;
+	margin: 0 0 0 45em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img5 {
+	position: absolute;
+	margin: 15em 0 0 0;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img6 {
+	position: absolute;
+	margin: 15em 0 0 15em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img7 {
+	position: absolute;
+	margin: 15em 0 0 30em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img8 {
+	position: absolute;
+	margin: 15em 0 0 45em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}	
+.img9 {
+	position: absolute;
+	margin: 30em 0 0 0;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img10 {
+	position: absolute;
+	margin: 30em 0 0 15em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img11 {
+	position: absolute;
+	margin: 30em 0 0 30em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img12 {
+	position: absolute;
+	margin: 30em 0 0 45em;
+    background-color: rgb(0,150,255);
+    height: 240px;
+	}
+.img13 {
+	position: absolute;
+	margin: 45em 0 0 0;
+	}
+.img14 {
+	position: absolute;
+	margin: 45em 0 0 15em;
+	}
+.img15 {
+	position: absolute;
+	margin: 45em 0 0 30em;
+	}
+.img16 {
+	position: absolute;
+	margin: 45em 0 0 45em;
+	}
+.img17 {
+	position: absolute;
+	margin: 60em 0 0 0;
+	}
+.img18 {
+	position: absolute;
+	margin: 60em 0 0 15em;
+	}
+.img19 {
+	position: absolute;
+	margin: 60em 0 0 30em;
+	}
+.img20 {
+	position: absolute;
+	margin: 60em 0 0 45em;
+	}
+.img21 {
+	position: absolute;
+	margin: 75em 0 0 0;
+	}
+.img22 {
+	position: absolute;
+	margin: 75em 0 0 15em;
+	}
+.img23 {
+	position: absolute;
+	margin: 75em 0 0 30em;
+	}
+.img24 {
+	position: absolute;
+	margin: 75em 0 0 45em;
+	}
+.img25 {
+	position: absolute;
+	margin: 90em 0 0 0;
+	}
+.img26 {
+	position: absolute;
+	margin: 90em 0 0 15em;
+	}
+.img27 {
+	position: absolute;
+	margin: 90em 0 0 30em;
+	}
+.img28 {
+	position: absolute;
+	margin: 90em 0 0 45em;
+	}

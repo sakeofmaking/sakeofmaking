@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Light Doorbell</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="light, doorbell, deaf, camera, circuit, hack, flash, trigger, adafruit, transistor, voltage, regulator">
+    <meta name="description" content="A doorbell that alerts you of guests via a flash of light" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://github.com/sakeofmaking"><img src="images/github.png" width="32" height="32" alt="GitHub" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Light Doorbell</h2>
+    
+    <h3>January 7th, 2016</h3>
+        
+    <p><img src="https://c2.staticflickr.com/2/1606/23872408379_30cbebc71f_z.jpg" width="640" height="480" alt="Light Doorbell" /></p>
+    <iframe width="640" height="382" src="https://www.youtube.com/embed/jXFfF__r_Ok" frameborder="0" allowfullscreen></iframe>    
+    <p>The Light Doorbell uses a flash of light, rather than the sound of a bell, to indicate someone is at the door . Great for the deaf 
+        and those annoyed by the sound of someone ringing your doorbell over and over again.</p>
+    
+        
+    <h4>Step 1: Materials + Tools</h4> 
+    <p><img src="https://c2.staticflickr.com/2/1476/24132174222_26e5fe8518_z.jpg" width="640" height="480" alt="Materials" /></p> 
+    <p><img src="https://c2.staticflickr.com/2/1651/24214139616_811846ce81_z.jpg" width="640" height="480" alt="Tools" /></p>    
+    <p>Materials:</p>
+    <ul>
+        <li>(x1) Disposable camera. I used a Kodak FunSaver from Walgreens.</li>
+        <li>(x1) Keyfob Single Button RF Remote Control - 315MHz from <a href="http://www.adafruit.com/products/1392">adafruit</a></li>
+        <li>(x1) Simple RF M4 Receiver - 315MHz Momentary Type from <a href="https://www.adafruit.com/products/1096">adafruit</a></li>
+        <li>(x1) 5VDC relay from Radio Shack</li>
+        <li>(x1) Clear 4.3" x 1.6" x 3.3" project box from <a href="http://www.amazon.com/gp/product/B00D5T2O34?psc=1&redirect=true&ref_=oh_aui_detailpage_o00_s00">Amazon</a></li>
+        <li>(x1) 1.5V regulator. I used LT1587CT-1.5 from <a href="http://www.digikey.com/product-detail/en/LT1587CT-1.5%23PBF/LT1587CT-1.5%23PBF-ND/963160">Digi-Key</a></li>
+        <li>(x1) NPN transistor. I used TIP120 from <a href="https://www.adafruit.com/products/976">adafruit</a></li>
+        <li>(x1) USB Micro-B Breakout Board from <a href="https://www.adafruit.com/products/1833">adafruit</a></li>
+        <li>(x1) 220 Ohm resistor</li>
+        <li>(x1) 5 x 7cm PCB from <a href="http://www.amazon.com/gp/product/B012YZ2PXI?psc=1&redirect=true&ref_=oh_aui_detailpage_o03_s00">Amazon</a></li>
+        <li>(x1) Micro USB cable</li>
+        <li>(x1) USB wall charger</li>
+        <li>(x1) 22 gauge wire</li>
+        <li>(x1) 60/40 solder</li>
+    </ul>
+    <p>Tools:</p>
+     <ul>
+        <li>(x1) Soldering iron</li>
+        <li>(x1) Electric Drill + drill bits</li>
+        <li>(x1) Wire strippers</li>
+        <li>(x1) #0 Screwdriver</li>
+        <li>(x1) Needle nose pliers (optional)</li>
+        <li>(x1) PanaVise (optional)</li>
+        <li>(x1) Sharpie (optional)</li>
+        <li>(x1) Self-healing cutting mat (optional)</li>
+    </ul>
+      
+    <h4>Step 2: Prep Disposable Camera</h4>
+    <p id="warning">WARNING: The internal capacitor is a high voltage and might retain some voltage after discharging. Before removing the enclosure, 
+        discharge the capacitor by triggering the flash. With the flash triggered, begin desconstructing the camera. Remove any stickers. 
+        Use the screwdriver to press the tabs in and pry the case open. Remove the battery. Once the circuit is exposed, identify the flash 
+        trigger and flash charge switches. As a precaution, use an insulated screwdriver to short the flash trigger switch. Continue and 
+        extract the circuit.</p>
+    <p>With the circuit extracted, solder a wire to each flash trigger contact. Also solder a wire to each battery 
+        contact. Next solder down the flash charge switch so the flash is always ready to discharge. To do this, 
+        first remove the metal button. Bend a short uninsulted wire across the exposed contacts. Solder the wire in place.</p>
+    <p><img src="https://c2.staticflickr.com/2/1462/23612006284_a618275bcb_z.jpg" width="640" height="480" alt="Camera Prep" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1643/23948267360_f669bd45bd_z.jpg" width="640" height="480" alt="Camera Prep" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1535/23872406749_3b88cdc564_z.jpg" width="640" height="480" alt="Camera Prep" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1557/23872406309_6322abca4a_z.jpg" width="640" height="480" alt="Camera Prep" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1445/23872405849_59660053d7_z.jpg" width="640" height="480" alt="Camera Prep" /></p>
+        
+    <h4>Step 3: Assemble the Circuit</h4>
+    <p>Use the below picture for reference when arranging the parts on the PCB. Use the below schematic to know how to connect the 
+        parts. Solder it to the PCB accordingly.</p>
+    <p>When the RF Remote Control button is depressed a 315MHz signal is sent to the Receiver. Pin D2 of the Receiver is momentarily 
+        set HIGH. This momentarily closes the gate of the NPN transistor, completing the path of the relay. A relay is used because 
+        the flash trigger voltage is too high for the transistor. With the relay active, the flash trigger is closed and the flash triggers.
+        Because the flash charge is always closed the camera is always ready to flash or getting ready to flash. The camera normally runs 
+        on a simple AA battery. To replicate the power supply we've replaced the battery with a 1.5V voltage regulator conected to the
+        5V USB power supply.</p>
+    <p><img src="https://c2.staticflickr.com/2/1564/23872405229_5114bac90d_z.jpg" width="640" height="480" alt="Layout" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1537/23613418353_b36bc54e78_z.jpg" width="640" height="608" alt="Schematic" /></p>
+        
+    <h4>Step 4: Project Box It</h4>
+    <p>Place the circuit inside the project box. Identify where the micro USB cable needs to go and mark with a Sharpie. Use the appropriatly 
+        sized drill bit for your micro USB cable and begin drilling. Connect your micro USB cable. Secure the lid using the #0 screwdriver.</p>
+    <p><img src="https://c2.staticflickr.com/2/1639/23613418363_475abcc4d2_z.jpg" width="640" height="480" alt="Project Box" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1624/23944654570_4b06ed448e_z.jpg" width="640" height="480" alt="Project Box" /></p>
+    <p><img src="https://c2.staticflickr.com/2/1449/23944654280_07b6bd4539_z.jpg" width="640" height="480" alt="Project Box" /></p>
+  
+    <h4>Step 5: Enjoy</h4>
+    <p>Place somewhere within range of the RF remote control and in the area with the most traffic, such as a living room. Plug it in 
+        and wait patiently for a friend to come over and ring your new doorbell!</p>
+    <p><img src="https://c2.staticflickr.com/2/1509/24157695641_f4d29d349e_z.jpg" width="640" height="480" alt="Light Doorbell" /></p>
+            
+    </div>
+    
+  </body>
+  
+</html>

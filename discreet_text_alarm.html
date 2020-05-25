@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Discreet Text Alarm System</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="discreet, text, alarm, system, diy, project, arduino, security, yun, SMS">
+    <meta name="description" content="A silent alarm system that texts you of intruders" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://github.com/sakeofmaking"><img src="images/github.png" width="32" height="32" alt="GitHub" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Discreet Text Alarm System</h2>
+    
+    <h3>September 18th, 2015</h3>
+        
+    <p><img src="https://farm1.staticflickr.com/728/20801169143_edee4c6055_z.jpg" width="640" height="480" alt="Idle State" /></p>
+        
+    <p>The Discreet Text Alarm System is a silent door alarm that texts the owner of intruders. The setting is late at night. You're away 
+        on vacation. The thief knows this. He picks the lock and walks in. He immediately notices a blinking light next to the door and 
+        unplugs the device disabling it before it can alert you of his presence. He then proceeds to steal all your belongings. Clearly, 
+        my project is in its infancy. As of now, the intruder can just unplug the Arduino before the text is sent.</p>
+    <p>This project was inspired by 
+        <a href="http://www.instructables.com/id/Washer-Dryer-Laundry-Alarm-using-Arudino-SMS-Text-/">MakerBee's instructable</a>. We'll be borrowing 
+        heavily from their designs.</p>
+    <p><img src="https://farm1.staticflickr.com/612/21396766716_c2cc6afc35_z.jpg" width="640" height="480" alt="State Diagram" /></p>
+    <p>Let me walk you through how the system works using the above state diagram. On reset the system is in state S0. In S0, the door 
+        sensor is disabled and the system is listening for a button press. On button press the system enters the wait period, S1, where 
+        the LED blinks on and off for a set amount of time before entering the armed state, S2. In S2 the system listens to the door 
+        sensor, which is tripped when the door is open. Once the door sensor is tripped the system enters the second wait period, S3. 
+        In this wait period the system again listens for a button press. If the button is pressed, the system returns to S0. If no button 
+        press and the wait time is up, the system enters S4 where a text is sent. After S4 the system returns to S0 and the cycle repeats.</p>
+        
+    <h4>Step 1: Materials + Tools</h4> 
+    <p>Materials:</p>
+    <ul>
+        <li>Arduino Yun from <a href="http://www.adafruit.com/product/1498">adafruit</a></li>
+        <li>Temboo account</li>
+        <li>Twilio account</li>
+        <li>9V, 250mA or more, 2.1mm center pin positive adapter or alternative Arduino power supply</li>
+        <li>breadboard</li>
+        <li>Magnetic contact switch (door sensor) from <a href="http://www.adafruit.com/product/375">adafruit</a></li>
+        <li>10kOhm (brown black orange gold) resistor x2</li>
+        <li>5mm red LED</li>
+        <li>SPST momentary ON pushbutton switch</li>
+        <li>breadboarding wire</li>
+    </ul>
+    <p>Tools:</p>
+     <ul>
+        <li>Arduino IDE from <a href="https://www.arduino.cc/en/Main/Software">Arduino</a></li>
+    </ul>
+      
+    <h4>Step 2: Setup Temboo and Twilio Accounts</h4>
+    <p>Begin by following <a href="http://www.instructables.com/id/Washer-Dryer-Laundry-Alarm-using-Arudino-SMS-Text-/step2/Setting-up-your-Temboo-and-Twilio-accounts/">Step 2</a> of MakerBee's instructable. Their instructions are are clear and concise as can be.</p>    
+     
+    <h4>Step 3: Setup Arduino Yun</h4>
+    <p>Follow <a href="http://www.instructables.com/id/Washer-Dryer-Laundry-Alarm-using-Arudino-SMS-Text-/step3/Setting-up-your-Arduino-Yun-on-the-wireless-networ/">Step 3</a> of MakerBee's instructable.</p>
+        
+    <h4>Step 4: Setup Arduino IDE</h4>
+    <p>Follow <a href="http://www.instructables.com/id/Washer-Dryer-Laundry-Alarm-using-Arudino-SMS-Text-/step4/Setting-up-the-Arduino-programming-environment/">Step 4</a> of MakerBee's instructable.</p>
+        
+    <h4>Step 5: Assemble the Circuit</h4>
+    <p>Follow the below pictorial diagram and schematic to assemble your circuit.</p>
+    <p><img src="https://farm1.staticflickr.com/731/21287584848_780982a2f8_z.jpg" width="640" height="395" alt="Pictorial Circuit" /></p>
+    <p><img src="https://farm6.staticflickr.com/5631/21464397802_5cfa93c658_o.jpg" width="640" height="860" alt="Schematic Diagram" /></p>
+    <iframe width="640" height="382" src="https://www.youtube.com/embed/ymF9rsKk47I" frameborder="0" allowfullscreen></iframe>
+        
+    <h4>Step 6: Upload the Code</h4>
+    <p>Connect your Arduino Yun to your computer via wifi or cable. Copy and paste the linked 
+        <a href="https://github.com/sakeofmaking/Discreet_Text_Alarm/blob/master/Discreet_Text_Alarm.ino">code</a> 
+        into your Arduino IDE. Enter your specific Temboo Account, Temboo Application, Temboo Key, Twilio Account SID, Twilio Auth Token, 
+        Twilio number, and personal number in the appropriate define statements. Run Verify and then Upload. Give it a test run 
+        to make sure everything is working nicely. Adjust the waitTime and codeTime variables if necessary.</p>
+    <p><img src="https://farm6.staticflickr.com/5698/21465946642_4ca482a601_b.jpg" width="640" height="815" alt="Code" /></p>
+        
+    <h4>Step 7: Install by the Door</h4>
+    <p>I taped a small wooden project box next the door to act as a shelf for the system. I also used some cork to help level the door sensor. 
+        This is probably the easiest setup. You might want to try something else. Just remember, if you're powering your Arduino via a wall 
+        charger, to place the system within range of a wall outlet.</p>
+    <p><img src="https://farm6.staticflickr.com/5668/20801171533_de7586f6e6_z.jpg" width="640" height="480" alt="Installed System" /></p>
+        
+    <h4>Step 8: Enjoy</h4>
+    <p>Plug in your system, arm it, close the door, and invite a thief over.</p>
+    <iframe width="640" height="382" src="https://www.youtube.com/embed/AiSY_al6SKQ" frameborder="0" allowfullscreen></iframe> 
+        
+    <h4>Next Step</h4>
+    <p>The next step would be to add a wireless code panel and hide the Arduino Yun out of sight. This way if someone disables the code panel 
+        the Arduino Yun can still send a text.</p>
+        
+    </div>
+    
+  </body>
+  
+</html>

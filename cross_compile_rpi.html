@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Cross Compile RPi</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="cross, compile, linux, kernel, raspberry, pi, rpi, diy, class, project, EECS">
+    <meta name="description" content="A how-to cross compile the linux kernel on to the Raspberry Pi" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://www.etsy.com/shop/SakeofMaking"><img src="images/etsy.png" width="32" height="32" alt="Etsy" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Phase 1: Cross Compile Kernel to the Raspberry Pi</h2>
+    
+    <h3>December 2nd, 2015</h3>
+        
+    <p><img src="https://c1.staticflickr.com/1/611/22898884633_a887bfde9a_z.jpg" width="640" height="480" alt="My Pi" /></p>
+        
+    <p>For Phase 1 we will be rebuilding the Linux kernel for a Raspberry Pi (RPi) by cross compiling from another Linux system. 
+        Before starting, check that you have the necessary marterials and tools.</p>
+        
+    <h4>Step 1: Materials + Tools</h4> 
+    <ul>
+        <li>Host Computer. I'm using a Macbook</li>
+        <li>Raspberry Pi. I'm using the Model B</li>
+        <li>SD card preloaded with NOOBS</li>
+        <li>SD card reader</li>
+        <li>Micro USB cable</li>
+        <li>HDMI cable</li>
+        <li>HDMI monitor</li>
+        <li>Keyboard + mouse</li>
+        <li>5mm LED</li>
+    </ul>
+      
+    <h4>Step 2: Brief Overview of the Raspberry Pi</h4>
+    <p>The RPi is an inexpensive credit-card-sized single board computer developed with the intention of teaching programming 
+        and basic computer science to students. It supports various Linux distributions including those custom built.</p>
+        
+    <p>There are a few RPi models to choose from. As of writing this, Raspberry Pi Zero was released. I own a RPi 
+        Model B and will be using it for this project (pictured above).</p>
+
+    <p>Raspberry Pi Models [1]
+    <table id="model">
+    <tr class = "top"><td class = "left">Feature</td><td class = "left">Model A</td><td class = "left">Model B</td><td class = "left">Model A+</td><td class = "left">Model B+</td><td>Compute Model</td></tr>
+    <tr class = "top"><td class = "left">BRCM2835 SoC</td><td class = "left">Yes</td><td class = "left">Yes</td><td class = "left">Yes</td><td class = "left">Yes</td><td>Yes</td></tr>
+    <tr class = "top"><td class = "left">Standard SoC Speed</td><td class = "left">700Mhz</td><td class = "left">700Mhz</td><td class = "left">700Mhz</td><td class = "left">700Mhz</td><td>700Mhz</td></tr>
+    <tr class = "top"><td class = "left">RAM</td><td class = "left">256MB</td><td class = "left">512MB</td><td class = "left">256MB</td><td class = "left">512MB</td><td>512MB</td></tr>
+    <tr class = "top"><td class = "left">Storage </td><td class = "left">Full SD</td><td class = "left">Full SD</td><td class = "left">Micro SD</td><td class = "left">Micro SD</td><td>4GB eMMC</td></tr>
+    <tr class = "top"><td class = "left">Ethernet 10/100</td><td class = "left">No</td><td class = "left">Yes</td><td class = "left">No</td><td class = "left">Yes</td><td>No</td></tr>
+    <tr class = "top"><td class = "left">HDMI output port</td><td class = "left">Yes</td><td class = "left">Yes</td><td class = "left">Yes</td><td class = "left">Yes</td><td>Yes</td></tr>
+    <tr class = "top"><td class = "left">Composite video output</td><td class = "left">Yes</td><td class = "left">Yes</td><td class = "left">On 3.5mm jack</td><td class = "left">On 3.5mm jack</td><td>Yes</td></tr>
+    <tr class = "top"><td class = "left">Number of USB2.0 ports</td><td class = "left">1</td><td class = "left">2</td><td class = "left">1</td><td class = "left">4</td><td>1</td></tr>
+    <tr class = "top"><td class = "left">Expansion header</td><td class = "left">26</td><td class = "left">26</td><td class = "left">40</td><td class = "left">40</td><td>N/A</td></tr>
+    <tr class = "top"><td class = "left">Number of available GPIO</td><td class = "left">17</td><td class = "left">17</td><td class = "left">26</td><td class = "left">26</td><td>48</td></tr>
+    <tr class = "top"><td class = "left">3.5mm audio jack</td><td class = "left">Yes</td><td class = "left">Yes</td><td class = "left">Audio/Video</td><td class = "left">Audio/Video</td><td>N/A</td></tr>
+    <tr class = "top"><td class = "left">Number of camera interface ports (CSI-2)</td><td class = "left">1</td><td class = "left">1</td><td class = "left">1</td><td class = "left">1</td><td>2</td></tr>
+    <tr class = "top"><td class = "left">Number of LCD display interface ports (DSI)</td><td class = "left">1</td><td class = "left">1</td><td class = "left">1</td><td class = "left">1</td><td>2</td></tr>
+    <tr class = "top"><td class = "left">Power (bare, approx, 5v)</td><td class = "left">300mA, 1.5W</td><td class = "left">700mA, 3.5W</td><td class = "left"></td><td class = "left">650mA, 3W</td><td></td></tr>
+    <tr><td class = "left">Size</td><td class = "left">85 x 56 x 15mm</td><td class = "left">85 x 56 x 17mm</td><td class = "left">65 x 56 x 12mm</td><td class = "left">85 x 56 x 17mm</td><td>62 x 30 x 3mm</td></tr>
+    </table></p>
+        
+    <h4>Step 3: Setup Host Linux System</h4>   
+    <p>Obtain a suitable Linux cross-compilation host. Ubuntu is good since Raspbian is also a Debian distribution; commands 
+        will be similar. Ubuntu can be setup using a virtual machine, or installed directly on your computer. I'm running 
+        <a href="http://www.ubuntu.com/download/desktop">Ubuntu 14.04</a> on my Macbook via <a href="http://store.vmware.com/store/vmware/en_US/DisplayProductDetailsPage/ThemeID.2485600/productID.323689100">VMware Fusion 8</a>. 
+        Upon installing VMware, getting Ubuntu running is as simple as dragging and dropping the disk image file.</p>
+    <p>Once Ubuntu is running, open Terminal and install the following packages [2][3].</p>
+    <p class = "code">$ sudo apt-get install git lib32stdc++6 libc6-dev-i386 </p>
+        
+    <h4>Step 4: Install Toolchain</h4>
+    <p>With Ubuntu setup, the next step would be to install the latest cross compiler toolchain. Ubuntu has an arm cross compiler 
+        available via "apt-get" [4].</p>
+    <p class = "code">$ sudo apt-get install gcc-arm-linux-gnueabi<br>
+        $ arm-linux-gnueabi-gcc --version<br>
+      arm-linux-gnueabi-gcc (Ubuntu/Linaro 4.7.3-12ubuntu1) 4.7.3 </p>
+      
+    <h4 class = "red">WARNING</h4>
+    <p>Do not use the toolchain provided by <a href="https://www.raspberrypi.org/documentation/linux/kernel/building.md">raspberrypi.org</a>.
+      Trying to compile the kernel using this toolchain returned the follow error message.</p>
+    <p class = "code">arch/arm/kernel/asm-offsets.c:54:2: error: #error Your compiler is <br>
+        too buggy; it is known to miscompile kernels<br>
+        #error Your compiler is too buggy; it is known to miscompile kernels<br>
+        ^<br>
+        arch/arm/kernel/asm-offsets.c:55:2: error: #error and result in <br>
+        filesystem corruption and oopses.<br>
+        #error and result in filesystem corruption and oopses.<br>
+        ^<br>
+        make[1]: *** [arch/arm/kernel/asm-offsets.s] Error 1<br>
+        make: *** [prepare0] Error 2</p>
+    <p>According to this <a href="https://github.com/raspberrypi/linux/issues/758">Github forum</a>, Versions >= 4.8.0 and 
+        < 4.8.3 are considered buggy by the kernel.</p>
+      
+    <h4>Step 5: Cross Compile Kernel</h4>
+    <p>At this point you might want to create a seperate directory "raspberrypi" and within that directory "kernel".
+      Enter directory "kernel" and clone the latest linux source code.</p>
+    <p class = "code">$ mkdir raspberrypi<br>
+        $ cd raspberrypi<br>
+        $ mkdir kernel<br>
+        $ cd kernel<br>
+        $ git clone --depth=1 https://github.com/raspberrypi/linux</p>
+    <p>After this is done, you should see the directory "linux". Enter this directory and generate a .config 
+      file specific to the RPi.</p>
+    <p class = "code">$ cd linux<br>
+        $ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- bcmrpi_defconfig</p>
+    <p>Finally, cross compile the kernel.</p>
+    <p class = "code">$ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi-<br> 
+    <p>This will create zImage under linux/arch/arm/boot.</p>
+          
+    <h4>Step 6: Transfer to SD Card</h4>
+    <p>Before connecting your SD card, use lsblk to list the different block devices currently connected.</p>
+    <p class = "code">$ lsblk<br>
+        sda<br>   
+        |-sda1<br>
+        |-sda2<br>
+        |-sda5</p>
+    <p>Connect the SD card. lsblk again.</p>
+    <p class = "code">$ lsblk<br>
+        sda<br>  
+        |-sda1<br>  
+        |-sda2<br> 
+        |-sda5<br> 
+        sdb<br>     
+        |-sdb1<br>  
+        |-sdb2<br> 
+        |-sdb5</p> 
+    <h4 class = "red">WARNING</h4>
+    <p>Be careful to identify which partition is fat32 and which is ext4. To help, I installed <a href="http://gparted.org/">gparted</a>. Gparted 
+      is a free partition editor. We'll be using it to identify which partition is which.</p>
+    <p class = "code">$ sudo apt-get install gparted<br>
+        $ sudo parted<br>
+        select dev/sdb<br>
+        print</p>
+    <p>This will identify the different partitions in sdb. For me, sdb1 is fat32 and sdb5 is ext4. Enter "quit" 
+      to exit gparted.</p>
+    <p>With the partitions identified, we can continue and mount the file systems.</p>
+    <p class = "code">$ mkdir mnt/fat32<br>
+        $ mkdir mnt/ext4<br>
+        $ sudo mount /dev/sdb1 mnt/fat32<br>
+        $ sudo mount /dev/sdb5 mnt/ext4 </p>
+    <p>Install the modules directly on the SD card.</p>
+    <p class = "code">$ sudo make ARCH=arm CROSS_COMPILE=arm-linux-gnueabi- INSTALL_MOD_PATH=mnt/ext4 modules_install</p>
+    <p>Copy the kernel and device tree blobs to the SD card. Backup the current kernel first.</p>
+    <p class = "code">$ sudo cp mnt/fat32/$KERNEL.img mnt/fat32/$KERNEL-backup.img<br>
+        $ sudo scripts/mkknlimg arch/arm/boot/zImage mnt/fat32/$KERNEL.img<br>
+        $ sudo cp arch/arm/boot/dts/*.dtb mnt/fat32/<br>
+        $ sudo cp arch/arm/boot/dts/overlays/*.dtb* mnt/fat32/overlays/<br>
+        $ sudo cp arch/arm/boot/dts/overlays/README mnt/fat32/overlays/<br>
+        $ sudo umount mnt/fat32<br>
+        $ sudo umount mnt/ext4</p>
+      
+    <h4>Step 7: Boot Raspberry Pi</h4> 
+    <p>This step is fairly straight forward. Plug the SD card into the RPi and power on. Follow the on-screen instructions
+        to boot.</p>
+        
+    <h2>Phase 2: Control Raspberry Pi GPIO Pins in the User Space</h2>
+    
+    <h3>December 4th, 2015</h3>
+     
+    <p><img src="https://c1.staticflickr.com/1/774/23525992155_bf73c00797_z.jpg" width="640" height="480" alt="LED" /></p>
+      
+    <p>For Phase 2, we will be experimenting with controlling the GPIO pins from the user space. Visit <a href="https://www.raspberrypi.org/documentation/usage/gpio/">GPIO: RASPBERRY PI MODELS A AND B</a> to learn more about GPIO 
+        pin numbers. I'll be using GPIO 8. To better visualize this, I connected an LED across pins 20 (GND) and 24 (GPIO 8). 
+        On the RPi now, open Terminal. To control GPIO 8 we need to reserve GPIO 8, set the direction as "output", and set 
+        the value as HIGH [5].</p>
+    <p class = "code">$ echo 8 > /sys/class/gpio/export<br>
+        $ echo "out" > /sys/class/gpio/gpio8/direction<br>
+        $ echo 1 > /sys/class/gpio/gpio8/value</p>
+    <p> At this point you should see the LED turn on. The following will turn off the LED and release it.</p>
+    <p class = "code">$ echo 0 > /sys/class/gpio/export<br>
+        $ echo 8 > /sys/class/gpio/unexport</p>
+    <p>To make this easier in the future, I made a script that blinks the LED 10 times.</p>
+    <p class = "code">$ nano loop10<br>
+        #!/bin/bash<br>
+        echo 8 > /sys/class/gpio/export<br>
+        echo "out" > /sys/class/gpio/gpio8/direction<br><br>
+
+        for i in 1 2 3 4 5 6 7 8 9 10<br>
+        do<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;echo 1 > /sys/class/gpio/gpio8/value<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;sleep 0.5s<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;echo 0 > /sys/class/gpio/gpio8/value<br>
+	    &nbsp;&nbsp;&nbsp;&nbsp;sleep 0.5s<br>
+        done<br><br>
+
+        echo 8 > /sys/class/gpio/unexport</p>
+    <p>Save it as "loop10", make it executable, and run it.</p>
+    <p class = "code">$ chmod u+x loop10<br>
+        $ sudo ./loop10</p>
+    <p>You should see the LED blink 10 times.</p>
+    <iframe width="640" height="382" src="https://www.youtube.com/embed/YqvLOyKm1GY" frameborder="0" allowfullscreen></iframe>
+        
+    <h2>Works Cited</h2>
+    <p>[1] https://www.raspberrypi.org/documentation/hardware/raspberrypi/models/specs.md<br>
+        [2] https://www.youtube.com/watch?v=I8eHz1PqKsk<br>
+        [3] https://www.raspberrypi.org/documentation/linux/kernel/building.md<br>
+        [4] http://bettercommute.org/emblinux/codesourcery_toolchain_lab.php?no_nav=1<br>
+        [5] http://falsinsoft.blogspot.com/2012/11/access-gpio-from-linux-user-space.html</p>   
+      
+    </div>
+    
+  </body>
+  
+</html>

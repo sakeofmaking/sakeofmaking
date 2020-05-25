@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Automated Watering System: VHDL</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="automated, watering, system, plant, vhdl">
+    <meta name="description" content="A watering system based on soil moisture and rain forecasted" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://www.etsy.com/shop/SakeofMaking"><img src="images/etsy.png" width="32" height="32" alt="Etsy" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Automated Watering System: Phase 2</h2>
+    
+    <h3>September 10th, 2015</h3>
+        
+    <p><img src="https://farm6.staticflickr.com/5805/21113729000_cc88fcfa02_z.jpg" width="640" height="360" alt="Automated Watering System" /></p>
+        
+    <p>This post is an expansion of the perevious post, <a href="auto_water_system.html">Automated Water System: VHDL</a>. In this expansion, 
+        three plots of land are supported each by their own valve. This means each plot of land can have it's soil moisture individually 
+        maintained. For the greatest diversity of plants, let's assign each plot of land a different soil preference: dry, normal, moist.
+        </p>
+    
+    <h4>Inputs and Outputs</h4>    
+    <p><img src="https://farm1.staticflickr.com/605/21113935468_803f55492b_z.jpg" width="640" height="180" alt="I/O Bits" /></p>    
+    <p>The soil moisture variability is made possible by adding another input, soil preference, for a total of three inputs of two bits each: 
+        (M3, M2), (M1, M0), (R1, R0). This gives four levels of soil moisture per soil preference.</p>
+    <p>Three diffent soil preferences means three different valves. Two bits, (V1, V0), are necessary to represent these three valves and an off state.</p> 
+    <p>For efficiency, let's assign each of these three plots of land a different soil preference: (V1, V0) = (0, 1) prefers (M3, M2) = (0, 1), 
+        (V1, V0) = (1, 0) prefers (M3, M2) = (1, 0), and (V1, V0) = (1, 1) prefers (M3, M2) = (1, 1). The below Truth Table defines this behavior.</p>   
+    
+    <p><img src="https://farm6.staticflickr.com/5657/21291207782_bae986e4a9_h.jpg" width="640" height="1403" alt="Truth Table" /></p>
+     
+    <p>This new Truth Table requires the State Transition Diagram also be updated but only for it's conditions. The actual diagram will remain 
+        the same. The conditions now must take into account the soil perference. The below Next State Table does just that.</p>    
+     
+    <p>State Transition Diagram<img src="https://farm6.staticflickr.com/5669/21155341872_4f63c2832a_z.jpg" width="640" height="480" alt="State Diagram" /></p>
+        
+    <p><img src="https://farm1.staticflickr.com/730/21114930459_48b0171882_c.jpg" width="640" height="800" alt="Next State Table" /></p>    
+    
+    <p>This updated State Transition Diagram makes full use of the different states. To satisfy each plot of land's soil preference that particular 
+        plot of land is thrown into the appropriate state. As the soil moisture changes the plot of land is again passed into a state that represents 
+        this before returning to state S0 where the valve is off.</p>    
+    
+    <h4>VHDL Code</h4>
+    <p>With the new Next State Table we can update the VHDL code. Linked is my updated <a href="http://www.edaplayground.com/x/6fx">VHDL source code</a>. 
+        The new conditions for S0 are provided below. Again, you'll notice that the conditions match the minterms mentioned earlier in the Truth 
+        Table.</p>
+        
+    <p><img src="https://farm1.staticflickr.com/685/21275565726_43025c6da2_z.jpg" width="640" height="240" alt="Code Snippet" /></p>    
+        
+    <h4>Simulation</h4>
+    <p>Below are two likely simulations demonstrating how different soil moistures can be maintained for different plots of land.</p> 
+    <p>Dry Soil Preference<img src="https://farm1.staticflickr.com/636/21309946741_0fbc354688_z.jpg" width="640" height="270" alt="Preference" /></p>
+    <p>The plot of land defined by (V1, V0) = (0, 1) has a soil preference (M3, M2) = (0, 1) = dry. This means a rain forecast of (R1, R0) = 
+        (0, 1) is enough to satisfy this preference. In the above Dry Soil Preference waveform, the system begins in state S0 because the rain forecasted 
+        is (0, 1). When the forecast drops to (0, 0) and the soil moisture (M1, M0) remains (0, 0) the state switches to S1 and the valve is opened. 
+        The valve remains open until the soil moisture changes. When the soil moisture reaches the desired (0, 1) the state switches back to S0 and the 
+        valve closes.</p>    
+    <p>Moist Soil Preference<img src="https://farm6.staticflickr.com/5703/21309947991_cc04b3fe41_z.jpg" width="640" height="270" alt="Preference" /></p>
+    <p>The plot of land defined by (V1, V0) = (1, 1) has a soil preference (M3, M2) = (1, 1) = moist. This means a rain forecast of (R1, R0) = 
+        (1, 1) is enough to satisfy this preference. In the above Moist Soil Preference waveform, the system begins in state S0 because the rain forecasted 
+        is (1, 1). When the forecast drops to (1, 0) and the soil moisture (M1, M0) remains (0, 0) the state switches to S1 and the valve is opened.
+        The valve remains open until the soil moisture changes. When the soil moisture reaches the desired (0, 1) the state switches back to S0 and the 
+        valve closes.</p>
+     <p>The above two simulations are very simular even though they have very different preferences. Both only need one more level of soil 
+        moisture to satisfy their soil preference. To increase the soil moisture by one more level both are thrown into state S1.</p>
+    
+    </div>
+    
+  </body>
+  
+</html>

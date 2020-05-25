@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Opinionated Tissue Box</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="opinionated, opinion, tissue, box, birthday, vahan, arduino, waveshield, happy, microcontroller, gift, diy, project, howto">
+    <meta name="description" content="A tissue box with an opinion" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://github.com/sakeofmaking"><img src="images/github.png" width="32" height="32" alt="GitHub" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Opinionated Tissue Box</h2>
+    
+    <h3>May 24th, 2020</h3>
+        
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/E5Y1zq5fZ2M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        
+    <p>The Opinionated Tissue Box is a tissue box that has been given opinions of its own. With each tissue pulled from the box, the box will 
+        share its opinion with you. Maybe it thinks you're doing a great job. Maybe it fears you're getting sick. Regardless, whether you asked for 
+        it or not, it will let you know.</p>
+        
+    <p>My friend and I have this anti-tradition tradition. We pass back and forth The Celebratory $100 Bill each birthday, in part, to stay in contact 
+        with each other but also to stray from tradition. We can never spend the bill so it's lost its innate value but gained a value you can't put a 
+        price on. In an attempt to make it more interesting we try presenting the bill in new and creative ways. The Opinionated Tissue Box is my new and
+        creative way for 2020. The hundred is on the bottom. My friend must listen through all of my opnions to reach it!</p>
+        
+    <h4>Step 1: Materials + Tools</h4>    
+    <p>Materials:</p>
+    <ul>
+        <li>(x1) <a href="https://www.adafruit.com/product/94">Adafruit Wave Shield for Arduino Kit - v1.1</a></li>
+        <li>(x1) 64GB SD card</li>
+        <li>(x1) Arduino Uno</li>
+        <li>(x1) USB A to USB B cable</li>
+        <li>(x1) <a href="https://www.adafruit.com/product/1766">Fast Vibration Sensor Switch (Easy to trigger)</a></li>
+        <li>(x1) external battery pack</li>
+        <li>(x1) <a href="https://www.amazon.com/HBlife-Dispenser-Rectangle-Organizer-Bathroom/dp/B074DRZM2R/ref=sr_1_11?s=bedbath&ie=UTF8&qid=1525018693&sr=1-11&keywords=tissue%2Bbox%2Bholder">acrylic tissue box</a></li>
+        <li>(x1) <a href="https://www.adafruit.com/product/2790">3.5mm (1/8") Stereo Audio Plug Terminal Block</a></li>
+        <li>(x2) speaker wire</li>
+        <li>(x1) 2x1 female header pin</li>
+        <li>(x1) <a href="https://www.thingiverse.com/thing:4376033">separator plate</a></li>
+    </ul>
+    <p>Tools:</p>
+     <ul>
+        <li>(x1) 3D Printer</li>
+        <li>(x1) electric drill</li>
+        <li>(x1) soldering iron</li>
+        <li>(x1) adjustable third hand</li>
+        <li>(x1) Arduino IDE</li>
+        <li>(x1) hot glue gun</li>
+        <li>(x1) self-healing cutting mat</li>
+    </ul>
+      
+    <h4>Step 2: Configure WAV Files</h4>
+    <p>Below is list of short sound clips I made. I ran out of things to say so I added some random sounds.</p>
+    <ol>
+        <li>"You da man"</li>
+        <li>"Do'h!"</li>
+        <li>"Happy Birthday Vahan"</li>
+        <li>"You go girl"</li>
+        <li>"God bless you"</li>
+        <li>"Gesundheit"</li>
+        <li>"You got this"</li>
+        <li>"Seize the day!"</li>
+        <li>"Carpe diem"</li>
+        <li>"You're very welcome"</li>
+        <li>"Beware the ides of March"</li>
+        <li>"Nic is awesome"</li>
+        <li>"That Nic is so cool"</li>
+        <li>"Nic is such a nice guy"</li>
+        <li>"Apple sauce"</li>
+        <li>"Don't get sick"</li>
+        <li>"Tissue?"</li>
+        <li>"Stop it that tickles"</li>
+        <li>"Not cool"</li>
+        <li>"Not again"</li>
+        <li>"Getting close"</li>
+        <li>"Just joking"</li>
+        <li>"I got you"</li>
+        <li>Mac boot up 1</li>
+        <li>Mac boot up 2</li>
+        <li>Mac crash 1</li>
+        <li>Mac crash 2</li>
+        <li>“Achu!"</li>
+        <li>Toilet</li>
+        <li>Wilhelm scream</li>
+    </ol>
+    <p>Covert the sound files to type WAV and optimize them for the Waveshield using <a href="https://learn.adafruit.com/adafruit-wave-shield-audio-shield-for-arduino/check-your-files">Audacity</a>. To import type M4A into Audacity on Windows OS, I downloaded the <a href="https://lame.buanzo.org/#lamewindl">FFmpeg</a> library. 
+        How to update Audacity's library preferences can be found at C:\Program Files (x86)\Audacity\help\manual\man\libraries_preferences.html. I 
+        also used Audacity to increase the sound file's volume by 15dB.</p>
+    <p>Format the SD card as FAT3 and download the WAV files to the SD card.</p>
+        
+    <h4>Step 3: Configure Waveshield</h4>
+    <p>Connect the Waveshield to the Arduino. Insert the SD card in the Waveshield. Plug in the Audio Plug and wire the speaker. 
+        Connect the Arduino to your computer via USB. Open the Arduino IDE and follow the <a href="https://learn.adafruit.com/adafruit-wave-shield-audio-shield-for-arduino/wavehc-library">instructions</a> to install the waveHC library. Run the test program and confirm your WAV files play on the 
+        Waveshield.</p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3c3foqq_uBIjmJULVpdOW3GU8W_yXftrol3XAAouDBMy9oipBzsMDXLLBwX1XDbMcUTPxczufgKUGNqeuPjtrb3ukWY4jVCle69F9TK7TOTJrOFPkWMQEh3Gwxej_FAb9aD81-C8u_iRvL2TxtHlEZ-9w=w1601-h1201-no" width="640" height="480" alt="Waveshield" /></p>
+    
+    <h4>Step 4: Program the Arduino</h4>
+    <p>With the Waveshield working, download the <a href="https://github.com/sakeofmaking/Opinionated-Tissue-Box/blob/master/tissue_box.ino">Opinionated 
+        Tissue Box program</a>. This will play an sound clip when the raw value on analog-in 0 drops below 10. This should occur when the vibration sensor 
+        is triggered.</p>
+        
+    <h4>Step 5: Assemble</h4>
+    <p>Prep the acrylic box. Drill a hole in the side for the USB power cable. Expect to mount the speaker in the base next to the Arduino. 
+        Drill mounting holes and speaker holes for the speaker in the base. I used bolts as standoffs to sandwich the electronics between 
+        the base and separateor plate. Drill holes in the corners of the base for the bolts.</p>
+        <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dJ_fT6Z8ZrAbLQgPwOMBP2B6AsVWvgNnrUfX8RpDv2BEmCtk-LjpapKlKq0pk5ONcEfdUNvMnDidxTYOcBb_RIrdCIOEcZAaq2iRHvlRUr40r-P5URELEcnlunE9ekoYHEe0LNfZrCf8bVJZLmlS5fjA=w1601-h1201-no" width="640" height="480" alt="Power Cable Hole" /></p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3ckqEbcf9oEZtS-lUqvZerktvl8fskn0Uq-T0h0vK9lX7xBMCpvMgaZZM9C7sH7i6uah2QFxhgH0-BcHx_DDg_uDhzChgKuE9fJlyNVvnKysGBx7wASaW8R_AKTaMP3VL3mPzDbryfADcTOwR9lKgAcAw=w1601-h1201-no" width="640" height="480" alt="Speaker Hole" /></p>
+    <p>Prep the vibration sensor. Wire the vibration sensor across A0 and Gnd, thin terminal to Gnd. Use a foot of speaker wire to extend the range of 
+        the vibration sensor. I soldered female header pins to the end of the speaker wire and glued the sensor inside the header socket.</p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3dIJU7pLk14EQkI9kdr_8xByNKAS1Mn9SY61UIsJLeLdtnr1ZyjCkuHH00p9IGooSRh1IPONeHa8GT5vBVBD8wzIEr5003dTkMolE8f-CUjaj1l0D66Ua55dPi9rIwhokFSukyHpEIHBcvzgV2_od9e4w=w970-h1292-no" width="640" height="853" alt="Vibration Sensor" /></p>
+    <p>Sandwich is all together. If you are unable to 3D print a separator plate, fret not. A separator plate can be made using various materials: sheet 
+        metal, plywood, acrylic, cardboard. You want something that can have holes drilled through it and is sturdy enough to sandwich the electronics 
+        against the base. Mount the speaker to the base and sandwich the Arduino between the base and separator plate. Insert the sandwich in the acrylic 
+        enclosure running the sensor through the tissue opening. Place any loose wire inside the tissue chamber and hot glue the sensor against the tissue 
+        opening edge. Expect the sensor to trigger with each tissue pull.</p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3evxZSsqzFmwxpWjT31Uj1PfN-ni-zlEdKqTUbWvCtSEmMaEhMMM-KiLEC7m4s4US5H2cudcJDeVwsyOUQ0ggr6O_g71XApo2mXNEw77GePkAW1npx6FkwvdSrxvGrTDVdwZO6Is4a9uxHNjBKGQuyJeQ=w1601-h1201-no" width="640" height="480" alt="Sandwich" /></p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3ePO1WYWdVNNbjdWW6WyOttc3MDgvF3hi1GDUxZKwDdyGyPJxAmfOKL9TIewsqv-EQwa2aQF3MLUV2YI2bEgkwPUR6pnJ6_0aVCxXdNOfutECWjZcWb9M38u7Sve-MACP3UhpR3yVaILUywD-kw67VZ4g=w1601-h1201-no" width="640" height="480" alt="Sensor Through" /></p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fnIBC8bqb1k7PCSyxtSbtlTAhBBog-3WWBGad0YFcPZZppiBNm5QQssjw6yxU6DPztQVLicVc-ydGqNEIOlZtMY3SZHcmTx9K6G-j7DWScrf6SEUiHse5Kg00xGehRWbdKWgBYqp9oG8Tb-0ShbijB5A=w1601-h1201-no" width="640" height="480" alt="Sensor Glued" /></p>
+    
+    <h4>Step 6: Enjoy</h4>
+    <p>Place your thoughtless gift (the cash) at the bottom of the tissue chamber. Pile tissues inside. You friend must suffer through recordings of 
+        your voice before arriving at "the prize".</p>
+    <p><img src="https://lh3.googleusercontent.com/pw/ACtC-3fKYZAi9dPt_H8RgZ8iKxavfEFegdxDXmObG26ShPQSd7ZF9_brALG9avU1USutPVeulUCdyFzpftH37sMv12-CGOgE_gcvgYtSrj1E85_lXzPEClPm8IPwqqJlejV6FtScHLLuxOk79e3iq-6t7KtMQg=w1601-h1201-no" width="640" height="480" alt="Enjoy" /></p>
+        
+    <h4>Nest Step</h4>
+    <p>My tissue box vibration sensor was calibrated while connected to a laptop. Unfortunately, different power supplies induce a different baselines 
+        on the Arduino's analog-in. A better alternative would be to use a binary sensor, one that is either on or off, connected to a digital-in on 
+        the Arduino.</p>
+        
+    </div>
+    
+  </body>
+  
+</html>

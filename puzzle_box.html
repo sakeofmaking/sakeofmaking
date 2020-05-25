@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  
+    <title>Puzzle Box</title>
+    
+    <link rel="stylesheet" type="text/css" href="web.css" />
+    <link rel="shortcut icon" href="images/favicon.png" />
+    <meta name="keywords" content="puzzle, box, birthday, vahan, arduino, wine, happy, microcontroller, gift, diy, project, howto, enthusiast, computer, scientist">
+    <meta name="description" content="A gift enclosure for the puzzle enthusiast" />
+
+  </head>
+  
+  <body>
+    
+    <p class="banner">
+    <a href="index.html">
+    <img src="images/banner.jpg" width="960" height="240" alt="Sake of Making" /></a>
+    </p>   
+    
+    <a href="index.html" id="navigation1">HOME</a>
+      
+    <a href="about.html" id="navigation2">ABOUT</a>
+      
+    <a href="contact.html" id="navigation3">CONTACT</a>
+
+    <div id="icons">
+    <p><a href="https://www.youtube.com/user/sakeofmakingchannel"><img src="images/youtube.png" width="32" height="32" alt="Youtube" /></a>
+    <a href="https://twitter.com/sakeofmaking"><img src="images/twitter.png" width="32" height="32" alt="Twitter" /></a>
+    <a href="https://www.pinterest.com/sakeofmaking/"><img src="images/pinterest.png" width="32" height="32" alt="Pinterest" /></a>
+    <a href="http://instagram.com/sakeofmaking/"><img src="images/instagram.png" width="32" height="32" alt="Instagram" /></a>
+    <a href="https://github.com/sakeofmaking"><img src="images/github.png" width="32" height="32" alt="GitHub" /></a></p>
+	</div>    
+    
+    <div id="content">
+    
+    <h2>Puzzle Box</h2>
+    
+    <h3>April 30th, 2017</h3>
+        
+    <iframe width="640" height="360" src="https://www.youtube.com/embed/MWJ01wNyXn8" frameborder="0" allowfullscreen></iframe>
+        
+    <p>The Puzzle Box is essentially glorified wrapping paper. It's a more thoughtful way at gifting a less thoughtful gift and it's perfect for the 
+        puzzle enthusiast or computer scientist. It presents the recipient with a challenge that, in the end, leaves them with a reward not a gift.</p>
+        
+    <p>My friend and I have this anti-tradition tradition. We pass back and forth The Celebratory $100 Bill each birthday, in part, to stay in contact 
+        with each other but also to stray from tradition. We can never spend the bill so it's lost its innate value but gained a value you can't put a 
+        price on. In an attempt to make it more interesting we try presenting the bill in new and creative ways. The Puzzle Box is my new and creative 
+        way for 2017.</p>
+        
+    <p>The Puzzle Box is made from a wine box with a sliding lid. In the OFF state, the lid is locked and doesn't slide back. Connecting power brings it 
+        to the ON state and the RED LED begins to flash. Only it's flashing at an odd rate. This is the recipient's hint. The LED is flashing a message of your 
+        choosing in morse code. I used the message "HAPPY BD", "BD" of course meaning "birthday". My friend is a computer scientist so I thought he 
+        might appreciate how "BD" is also hex (I was wrong). Convert this to binary, 0xBD = 0b10111101, and that's 8 bits of 1s and 0s. There are 
+        8 switches on our Puzzle Box labeled "1" for up and "0" for down. Entering the correct switch combination illuminates the GRN LED and enables 
+        the solenoid for 10 seconds allowing the recipient to slide back the lid revealing their prize...an Arduino Zero. Those things aren't cheap.</p>    
+        
+    <h4>Step 1: Materials + Tools</h4> 
+    <p><img src="https://c1.staticflickr.com/3/2817/33533304373_5fc31c703f_z.jpg" width="640" height="480" alt="Materials " /></p>      
+    <p>Materials:</p>
+    <ul>
+        <li>(x1) sliding wine box <a href="https://www.amazon.com/dp/B00UUIXACM/ref=twister_B019YW6Z6C">Amazon</a></li>
+        <li>(x1) scrap of wood from your last wood project</li>
+        <li>(x1) Arduino Zero (not Arduino Uno as in some pictures). I used the Arduino Zero for it's large number of interrupt ports.</li>
+        <li>(x1) Arduino power supply. I used a 9V center-pin-positive power adapter.</li>
+        <li>(x8) SWITCH TOGGLE SPST 6A 125V	from <a href="https://www.digikey.com/product-detail/en/nkk-switches/M2011SS1W01-UC/360-3289-ND/2105194">DigiKey</a></li>
+        <li>(x1) mini solenoid from <a href="https://www.adafruit.com/product/2776">adafruit</a></li>
+        <li>(x1) TIP20 transistor from <a href="https://www.adafruit.com/product/976">adafruit</a></li>
+        <li>(x2) 220 Ohm Resistor</li>
+        <li>(x1) 2.2 kOhm Resistor</li>
+        <li>(x1) GRN LED</li>
+        <li>(x1) RED LED</li>
+        <li>(x1) 1N4004 diode from <a href="https://www.adafruit.com/product/755">adafruit</a></li>
+        <li>(x1) spool of 22 AWG wire. I used solid core to make the wire easier to work with.</li>
+        <li>(x1) (optional) spool of 1/4" heatshrink. I used this to help bundle the wire together.</li>
+        <li>(x1) solder</li>
+        <li>(x1) hot glue</li>
+        <li>(x1) (optional) double-sided tape</li>
+        <li>(x1) CASH</li>
+    </ul>
+    <p><img src="https://c1.staticflickr.com/3/2869/33983476570_a1878778c8_z.jpg" width="640" height="480" alt="Tools " /></p>  
+    <p>Tools:</p>
+     <ul>
+        <li>(x1) pencil</li>
+        <li>(x1) electric drill with 1/4" bit</li>
+        <li>(x1) soldering iron</li>
+        <li>(x1) adjustable third hand</li>
+        <li>(x1) Arduino IDE</li>
+        <li>(x1) hot glue gun</li>
+        <li>(x1) (optional) mechanic gloves</li>
+        <li>(x1) wood carving set from <a href="https://www.amazon.com/Yasutomo-Linoleum-Cutting-Assorted-Steel/dp/B0027AGN6Q/ref=sr_1_19?ie=UTF8&qid=1493571726&sr=8-19&keywords=wood+carving+set">Amazon</a></li>
+        <li>(x1) hack saw</li>
+        <li>(x1) self-healing cutting mat</li>
+        <li>(x1) ruler</li>
+    </ul>
+      
+    <h4>Step 2: Carve the Wedge</h4>
+    <p>This will secure your lid while the solenoid is in the OFF state. Use the hack saw to cut a ~1"x1/2"x1/4" block of wood. Use the below
+        picture and wood carving tools to whittle the appropriate wedge.</p>
+    <p><img src="https://c1.staticflickr.com/3/2827/34343909345_589e4fdd24_z.jpg" width="640" height="480" alt="Wedge with overlay" /></p>    
+        
+    <h4>Step 3: Prep the Enclosure</h4>
+    <p>Plan where to place the Arduino, switches, and LEDs. With the lid facing you, such that the lid slides right, mark the top with a pencil 
+        for the LEDs and switches. I placed the LEDs in the upper left corner and spaced out the switches equally across the center. With the lid 
+        now facing up, mark the left side of the enclosure for the Arduino. You want the Arduino's power port accessible but not the programmable 
+        ports. Otherwise, your friend could reprogram the Arduino to unlock the box. Drill 11 holes with the 1/4" bit.</p>
+    <p><img src="https://c1.staticflickr.com/3/2855/34343978805_dd1f650808_z.jpg" width="640" height="480" alt="LED and switch placement" /></p>
+    <p><img src="https://c1.staticflickr.com/3/2867/34343982485_046777bc1a_z.jpg" width="640" height="480" alt="Arduino placement" /></p>
+        
+    <h4>Step 4: Build Switch Bundle</h4>
+    <p>Follow the below pictorial diagram to get an idea of how to wire the switch bundle. Build this outside the enclosure. 
+        Add heatshrink and then solder the switches. Remember to leave a little slack so the switches have no problem lining up with the 
+        enclosure. Install in the enclosure.</p>
+    <p><img src="https://c1.staticflickr.com/3/2871/34186039032_7ebed80be5_z.jpg" width="640" height="200" alt="Pictorial Diagram" /></p>
+    <p><img src="https://c1.staticflickr.com/5/4186/34186061792_0ddd09c768_z.jpg" width="640" height="480" alt="Close Up" /></p>
+    <p><img src="https://c1.staticflickr.com/3/2811/33960427920_ff5e2e3d30_z.jpg" width="640" height="480" alt="Installed" /></p>
+        
+    <h4>Step 5: Build LEDs</h4>
+    <p>Solder the LEDs according to the below pictures. Note, the resistor is on the positive terminal. Use a third hand to hold the resistor 
+        and LED as you solder. Add heat shrink.</p>
+    <p><img src="https://c1.staticflickr.com/3/2855/34344289345_8e16bf6587_z.jpg" width="640" height="480" alt="Solder LED" /></p>
+    <p><img src="https://c1.staticflickr.com/5/4181/34344288715_6b9f5fbcde_z.jpg" width="640" height="480" alt="Both LEDs" /></p>
+        
+    <h4>Step 6: Build Solenoid</h4>
+    <p>Wire the Solenoid according to the below schematic.</p>
+    <p><img src="https://c1.staticflickr.com/5/4156/34303598036_a3ef29a562_z.jpg" width="640" height="250" alt="Schematic" /></p> 
+    <p><img src="https://c1.staticflickr.com/5/4157/34303635046_2e795c1c39_z.jpg" width="640" height="480" alt="Solenoid circuit" /></p> 
+        
+    <h4>Step 7: Dry Run</h4>
+    <p>Copy and paste the <a href="https://github.com/sakeofmaking/Puzzle_Box/blob/master/puzzle_box.ino">linked code</a> 
+        into your Arduino IDE. Edit areas marked "*********** EDIT ***********" to create a custom morse message 
+        and switch combination. Download to your Arduino. Connect everything according the below schematic with the Arduino, LEDs, and solenoid 
+        outside the box. Test that it runs properly.</p>
+    <p><img src="https://c1.staticflickr.com/3/2871/33552666943_f77f5bd05b_z.jpg" width="640" height="480" alt="Schematic" /></p>
+    <p><img src="https://c1.staticflickr.com/5/4157/34204799162_5d25f65bcc_z.jpg" width="640" height="480" alt="Outside" /></p>
+        
+    <h4>Step 8: Bring it All Together</h4>
+    <p>Hot glue the switches. Install the LEDs and hot glue. Install the Arduino and DO NOT hot glue. What are you? Crazy? Just tape 
+        it down with some double-sided tape. The solenoid and wedge require I little more finesse to install correctly. Use the below pictorial 
+        diagram and pictures to better understand how to install the solenoid and wedge. Hot glue the wedge first. Use double-sided tape 
+        to test the solenoid before hot gluing. I ended up leaving the double-sided tape for a better connection with the inside wall.
+    <p><img src="https://c1.staticflickr.com/5/4184/34323364036_63cff19354_z.jpg" width="640" height="480" alt="Solenoid and Wedge" /></p>
+    <p><img src="https://c1.staticflickr.com/3/2845/33522732204_a56ed7f4d2_z.jpg" width="640" height="480" alt="Solenoid and Wedge" /></p>    
+    <p><img src="https://c1.staticflickr.com/3/2886/33522731264_9c42965d82_b.jpg" width="640" height="853" alt="Solenoid and Wedge" /></p>    
+        
+    <h4>Step 9: Enjoy</h4>
+    <p>Place your thoughtless gift (the cash) inside, slide the lid shut, and watch your friend stress out on their birthday trying to solve the 
+        puzzle only to smash your hard work open with a hammer.</p>
+    <p><img src="https://c1.staticflickr.com/3/2812/34364927775_382dd5a6e5_z.jpg" width="640" height="480" alt="Enjoy" /></p>
+        
+    </div>
+    
+  </body>
+  
+</html>
